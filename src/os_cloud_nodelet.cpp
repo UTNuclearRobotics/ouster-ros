@@ -112,6 +112,7 @@ class OusterCloud : public nodelet::Nodelet {
                 ouster_ros::cloud_to_cloud_msg(cloud, msg_ts, sensor_frame);
             sensor_msgs::PointCloud2Ptr pc_ptr =
                 boost::make_shared<sensor_msgs::PointCloud2>(pc);
+            pc_ptr->header.stamp = ros::Time::now();
             lidar_pubs[i].publish(pc_ptr);
         }
 
