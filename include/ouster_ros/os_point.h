@@ -25,6 +25,12 @@ struct EIGEN_ALIGN16 Point {
     uint8_t ring;
     uint16_t ambient;
     uint32_t range;
+    // -----------------------------------------------
+    // ADDED 2/14/23 TO TRACK INITIAL SCAN POSTION
+    float vp_x;
+    float vp_y;
+    float vp_z;
+    // -----------------------------------------------
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 };
 }  // namespace ouster_ros
@@ -41,5 +47,11 @@ POINT_CLOUD_REGISTER_POINT_STRUCT(ouster_ros::Point,
     (std::uint8_t, ring, ring)
     (std::uint16_t, ambient, ambient)
     (std::uint32_t, range, range)
+    // -----------------------------------------------
+    // ADDED 2/14/23 TO TRACK INITIAL SCAN POSTION
+    (float, vp_x, vp_x)
+    (float, vp_y, vp_y)
+    (float, vp_z, vp_z)
+    // -----------------------------------------------
 )
 // clang-format on

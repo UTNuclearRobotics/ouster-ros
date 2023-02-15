@@ -112,7 +112,11 @@ class OusterCloud : public nodelet::Nodelet {
                 ouster_ros::cloud_to_cloud_msg(cloud, msg_ts, sensor_frame);
             sensor_msgs::PointCloud2Ptr pc_ptr =
                 boost::make_shared<sensor_msgs::PointCloud2>(pc);
+            // ------------------------------------------
+            // CHRIS WORKAROUND TO 'SYNC CLOCKS' WITHOUT OFFICIAL PROTOCOL
             pc_ptr->header.stamp = ros::Time::now();
+            // pc_ptr->header.stamp = ros::Time(0);
+            // ------------------------------------------
             lidar_pubs[i].publish(pc_ptr);
         }
 
