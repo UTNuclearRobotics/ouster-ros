@@ -150,26 +150,23 @@ void scan_to_cloud(const ouster::XYZLut& xyz_lut,
             const auto xyz = points.row(u * ls.w + v);
             const auto ts =
                 (std::chrono::nanoseconds(timestamp[v]) - scan_ts).count();
-            // // -----------------------------------------------
-            // // ADDED 2/14/23 TO TRACK INITIAL SCAN POSTION
-            // auto vp_xyz = points.row(u * ls.w + v);
-            // // -----------------------------------------------
             cloud(v, u) = ouster_ros::Point{
                 {{static_cast<float>(xyz(0)), static_cast<float>(xyz(1)),
                   static_cast<float>(xyz(2)), 1.0f}},
+                0,
+                0,
+                0,
                 static_cast<float>(signal(u, v)),
+                0,
                 static_cast<uint32_t>(ts),
                 static_cast<uint16_t>(reflectivity(u, v)),
                 static_cast<uint8_t>(u),
                 static_cast<uint16_t>(near_ir(u, v)),
-                // static_cast<uint32_t>(range(u, v))};
-                // -----------------------------------------------
-                // ADDED 2/14/23 TO TRACK INITIAL SCAN POSTION
                 static_cast<uint32_t>(range(u, v)),
                 static_cast<float>(xyz(0)),
                 static_cast<float>(xyz(1)),
-                static_cast<float>(xyz(2))};
-                // -----------------------------------------------
+                static_cast<float>(xyz(2)),
+                0};
         }
     }
 }
